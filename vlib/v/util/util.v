@@ -98,7 +98,7 @@ pub fn launch_tool(is_verbose bool, tool_name string) {
 	vexe := pref.vexe_path()
 	vroot := os.dir(vexe)
 	set_vroot_folder(vroot)
-	tool_args := os.args[1..].join(' ')
+	tool_args := os.args[1..].map(it.replace(' ', '\\ ')).join(' ')
 	tool_exe := path_of_executable(os.real_path('$vroot/cmd/tools/$tool_name'))
 	tool_source := os.real_path('$vroot/cmd/tools/${tool_name}.v')
 	tool_command := '"$tool_exe" $tool_args'
